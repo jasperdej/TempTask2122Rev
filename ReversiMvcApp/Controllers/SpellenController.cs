@@ -398,6 +398,7 @@ namespace ReversiMvcApp.Controllers
         [Route("Beurt/{spelToken}")]
         public async ValueTask<string> GetAanDeBeurt(string spelToken)
         {
+            _logger.LogInformation("Het bord voor spel met token '{SpelToken}' is opgevraagd", spelToken);
             Spel correctSpel = await spellen.GetSpel(spelToken);
             if (correctSpel != null)
             {
@@ -405,6 +406,7 @@ namespace ReversiMvcApp.Controllers
             }
             else
             {
+                _logger.LogWarning("Het bord voor spel met token '{SpelToken}' kon niet gevonden worden", spelToken);
                 return "Geen spel gevonden";
             }
         }
