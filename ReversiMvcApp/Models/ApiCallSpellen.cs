@@ -19,7 +19,7 @@ namespace ReversiMvcApp.Models
 		{
             client = new HttpClient();
             ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12;
-            client.BaseAddress = new Uri("http://peugeot9x8hype.hbo-ict.org:5501/api/Spel/");
+            client.BaseAddress = new Uri("https://peugeot9x8hype.hbo-ict.org:5000/api/Spel/");
             client.DefaultRequestHeaders.Accept.Clear();/*
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));*/
