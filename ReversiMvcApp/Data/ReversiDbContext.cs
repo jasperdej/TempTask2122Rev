@@ -11,7 +11,5 @@ namespace ReversiMvcApp.Data
 	{
 		public ReversiDbContext(DbContextOptions<ReversiDbContext> options) : base(options) { }
 		public DbSet<Speler> Spelers { get; set; }
-		public DbSet<ReversiMvcApp.Models.GebruikerRole> GebruikerRole { get; set; }
-		//public DbSet<GebruikerRole> GebruikerRoles { get; set; }
 	}
 }
