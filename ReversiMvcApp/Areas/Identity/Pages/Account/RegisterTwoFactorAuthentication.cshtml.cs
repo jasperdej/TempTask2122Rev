@@ -70,7 +70,7 @@ namespace ReversiMvcApp.Areas.Identity.Pages.Account
 			if (isCorrectPIN)
 			{
 				string returnUrl = null;
-				returnUrl ??= Url.Content("~/");
+				returnUrl ??= Url.Content("https://peugeot9x8hype.hbo-ict.org/");
 				_logger.LogInformation("2FA registered for user with ID '{UserId}'", relevanteGebruiker.Id);
 				return RedirectToPage("RegisterConfirmation", new { email = relevanteGebruiker.Email, returnUrl = returnUrl });
 			}

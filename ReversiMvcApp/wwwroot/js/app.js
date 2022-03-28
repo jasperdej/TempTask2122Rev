@@ -259,7 +259,7 @@ Game.Reversi = (function(){
 Game.Data = (function(){
 
     let configMap = {
-        path: 'https://peugeot9x8hype.hbo-ict.org/Spellen/',
+        path: 'https://peugeot9x8hype.hbo-ict.org/ReversiApi/api/Spel/',
         apiKey: 'f6a132c79543334273e89822ceb23cf4',
         mock: [
             {
@@ -288,7 +288,7 @@ Game.Data = (function(){
         return result;
     }
 
-    const callAPI = async (url, type) => {
+    const callAPI = async (url, type, parameter) => {
         let response = await fetch(url);
         let result;
         if(type == 'json'){

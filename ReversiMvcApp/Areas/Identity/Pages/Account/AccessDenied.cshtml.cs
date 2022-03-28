@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ReversiMvcApp.Areas.Identity.Pages.Account
 {
     public class AccessDeniedModel : PageModel
     {
-        public void OnGet()
+        public async Task<IActionResult> OnGet()
         {
-
+            return RedirectToAction("Index", "Home");
         }
     }
 }
