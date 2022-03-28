@@ -7789,11 +7789,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\totti\\Desktop\\ReversiMvcApp\\ReversiMvcApp\\ReversiMvcApp.csproj",
+      "projectUniqueName": "C:\\Users\\totti\\Desktop\\GitReversi\\TempTask2122Rev\\ReversiMvcApp\\ReversiMvcApp.csproj",
       "projectName": "ReversiMvcApp",
-      "projectPath": "C:\\Users\\totti\\Desktop\\ReversiMvcApp\\ReversiMvcApp\\ReversiMvcApp.csproj",
+      "projectPath": "C:\\Users\\totti\\Desktop\\GitReversi\\TempTask2122Rev\\ReversiMvcApp\\ReversiMvcApp.csproj",
       "packagesPath": "C:\\Users\\totti\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\totti\\Desktop\\ReversiMvcApp\\ReversiMvcApp\\obj\\",
+      "outputPath": "C:\\Users\\totti\\Desktop\\GitReversi\\TempTask2122Rev\\ReversiMvcApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -259,7 +259,7 @@ Game.Reversi = (function(){
 Game.Data = (function(){
 
     let configMap = {
-        path: 'https://localhost:44302/api/Spel/',
+        path: 'https://localhost:5501/api/Spel/',
         apiKey: 'f6a132c79543334273e89822ceb23cf4',
         mock: [
             {

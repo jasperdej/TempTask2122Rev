@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7P38+IE/QS2HADJTIluaYg7Jb/zekfO7nw/esnks8SS6SNGJ0s814gBwkLsgC3Vtqgi55cgBYbkCU0A8pqnb1g==",
+  "dgSpecHash": "snEVPJO7i/1Va6VD97fACt8NGfSPFmKfLEsqvDiQMUX9mNhRy1xvKuwuaisTAT1i41bknyRGD4MDRKauTf5m/Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\totti\\Desktop\\ReversiMvcApp\\ReversiMvcApp\\ReversiMvcApp.csproj",
+  "projectFilePath": "C:\\Users\\totti\\Desktop\\GitReversi\\TempTask2122Rev\\ReversiMvcApp\\ReversiMvcApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\totti\\.nuget\\packages\\googleauthenticator\\2.4.0\\googleauthenticator.2.4.0.nupkg.sha512",
     "C:\\Users\\totti\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
