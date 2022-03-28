@@ -1,0 +1,18 @@
+﻿@page
+@model ReversiMvcApp.Areas.Identity.Pages.Account.RegisterTwoFactorAuthenticationModel
+@{
+	ViewData["Title"] = "Register 2FA";
+}
+
+<h1>@ViewData["Title"]</h1>
+<form method="post">
+	<p>Verificatiecode Google Authenticator.</p>
+	<img src="@ViewData["ImageUrl"]" height="300" width="300" />
+	<p>Verificatiecode als de foto niet zichtbaar is of als u niet in staat bent te verifiëren met de qr-code</p>
+	<p>@ViewData["Text"]</p>
+
+	<p>Voer hier de gegeven code in:</p>
+	<input type="text" name="authCode" id="authcode" />
+	<input type="hidden" name="userId" id="userId" value="@ViewData["Id"]" />
+	<button name="send" type="submit">Submit</button>
+</form>

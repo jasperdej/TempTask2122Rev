@@ -1,0 +1,136 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4">
+		<form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+			<h4>Create a new account.</h4>
+			<hr />
+			<div asp-validation-summary="All" class="text-danger"></div>
+			<div class="form-group">
+				<label asp-for="Input.Email"></label>
+				<input asp-for="Input.Email" class="form-control" />
+				<span asp-validation-for="Input.Email" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Input.Password"></label>
+				<div class="input-group" id="show_hide_password_main">
+					<input asp-for="Input.Password" class="form-control" id="password" onchange="checkPassword()"/>
+					<div class="input-group-text">
+						<a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+					</div>
+					<span asp-validation-for="Input.Password" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="progress">
+				<div class="progress-bar" id="wachtwoord_sterkte_bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+			</div>
+			<p id="wachtwoord_sterkte_tekst"></p>
+			<div class="form-group">
+				<label asp-for="Input.ConfirmPassword"></label>
+				<div class="input-group" id="show_hide_password_confirm">
+					<input asp-for="Input.ConfirmPassword" class="form-control" id="password_confirm" />
+					<div class="input-group-text">
+						<a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+					</div>
+					<span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Register</button>
+		</form>
+    </div>
+</div>
+<script>
+	$(document).ready(function () {
+		$("#show_hide_password_main a").on('click', function (event) {
+			event.preventDefault();
+			if ($('#show_hide_password_main input').attr("type") == "text") {
+				$('#show_hide_password_main input').attr('type', 'password');
+				$('#show_hide_password_main i').addClass("fa-eye-slash");
+				$('#show_hide_password_main i').removeClass("fa-eye");
+			} else if ($('#show_hide_password_main input').attr("type") == "password") {
+				$('#show_hide_password_main input').attr('type', 'text');
+				$('#show_hide_password_main i').removeClass("fa-eye-slash");
+				$('#show_hide_password_main i').addClass("fa-eye");
+			}
+		});
+		$("#show_hide_password_confirm a").on('click', function (event) {
+			event.preventDefault();
+			if ($('#show_hide_password_confirm input').attr("type") == "text") {
+				$('#show_hide_password_confirm input').attr('type', 'password');
+				$('#show_hide_password_confirm i').addClass("fa-eye-slash");
+				$('#show_hide_password_confirm i').removeClass("fa-eye");
+			} else if ($('#show_hide_password_confirm input').attr("type") == "password") {
+				$('#show_hide_password_confirm input').attr('type', 'text');
+				$('#show_hide_password_confirm i').removeClass("fa-eye-slash");
+				$('#show_hide_password_confirm i').addClass("fa-eye");
+			}
+		});
+	});
+
+	function checkPassword() {
+		var tekstBox = document.getElementById("wachtwoord_sterkte_tekst");
+		var progressBar = document.getElementById("wachtwoord_sterkte_bar");
+		var currentPassword = document.getElementById("password").value;
+		var tekstForBox = "Slecht";
+
+		var specialCharacters = new Array();
+		specialCharacters.push("[@@$!%*#?&()]");
+		specialCharacters.push("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]");
+		specialCharacters.push("[0123456789]");
+		specialCharacters.push("[abcdefghijklmnopqrstuvwxyz]");
+
+		var strength = 0;
+
+		//Add strength for the variety of symbols used
+		if (currentPassword.length >= 12) {
+			strength++;
+			for (var i = 0; i < specialCharacters.length; i++) {
+				if (new RegExp(specialCharacters[i]).test(currentPassword)) {
+					strength++;
+				}
+			}
+		}
+
+		progressBar.classList.remove("bg-danger");
+		progressBar.classList.remove("bg-warning");
+		progressBar.classList.remove("bg-success");
+
+		if (strength == 0) {
+			progressBar.style = "width:0%";
+			progressBar.AriaValueNow = "0";
+			progressBar.classList.add("bg-danger");
+		} else if (strength == 1) {
+			tekstForBox = "Zwak";
+			progressBar.style = "width:25%";
+			progressBar.AriaValueNow = "25";
+			progressBar.classList.add("bg-danger");
+		} else if (strength == 2) {
+			tekstForBox = "Minder zwak";
+			progressBar.style = "width:50%";
+			progressBar.AriaValueNow = "50";
+			progressBar.classList.add("bg-warning");
+		} else if (strength == 3 || strength == 4) {
+			tekstForBox = "Gemiddeld";
+			progressBar.style = "width:75%";
+			progressBar.AriaValueNow = "75";
+			progressBar.classList.add("bg-warning");
+		} else if (strength == 5) {
+			tekstForBox = "Sterk";
+			progressBar.style = "width:100%";
+			progressBar.AriaValueNow = "100";
+			progressBar.classList.add("bg-success");
+		}
+
+		tekstBox.innerHTML = tekstForBox;
+	}
+</script>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

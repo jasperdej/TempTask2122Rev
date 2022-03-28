@@ -1,0 +1,42 @@
+﻿@page
+@model ReversiMvcApp.Areas.Identity.Pages.Account.Manage.StatsModel
+@{
+	ViewData["Title"] = "Statistieken";
+	ViewData["ActivePage"] = ManageNavPages.Statistieken;
+}
+
+<h4>@ViewData["Title"]</h4>
+
+<div class="row">
+	<div class="col-md-6">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>
+						Gewonnen spellen
+					</th>
+					<th>
+						Gelijkgespeelde spellen
+					</th>
+					<th>
+						Verloren spellen
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						@ViewData["Gewonnen"]
+					</td>
+					<td>
+						@ViewData["Gelijk"]
+					</td>
+					<td>
+						@ViewData["Verloren"]
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+

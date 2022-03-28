@@ -1,0 +1,52 @@
+@model IEnumerable<ReversiMvcApp.Models.APISpel>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+	<a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Omschrijving)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Speler1Token)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Speler2Token)
+			</th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Omschrijving)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Speler1Token)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Speler2Token)
+				</td>
+				<td>
+					<a asp-action="RegisterForGame" asp-route-token="@item.Token">Speel</a>
+				</td>
+				<td>
+					<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+					<a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+					<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

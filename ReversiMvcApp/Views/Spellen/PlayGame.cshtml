@@ -1,0 +1,142 @@
+@model ReversiMvcApp.Models.APISpel 
+@{ 
+    ViewData["Title"] = "Play Game"; 
+}
+<meta charset="UTF-8"><title>Javascript getting started</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><meta content="width=device-width,initial-scale=1" name="viewport"><link rel="stylesheet" href="~/css/style.min.css"><script src="~/js/app.js"></script><script src="~/js/vendor.js"></script><script src="~/js/templates.js"></script><script src="~/js/signalr/dist/browser/signalr.js"></script><script src="~/js/reversiMessages.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script><body><div class="overlay" id="overlayWait"><div class="overlay--text"><p>Wachten op tegenstander...</p><a asp-area="" asp-controller="Spellen" asp-action="Index">Doe mee aan een ander spel</a> <a asp-area="" asp-controller="Spellen" asp-action="Create">Maak een nieuw spel</a></div></div><div class="overlay" id="overlayWit"><div class="overlay--text"><p>Wit heeft gewonnen!</p><a asp-area="" asp-controller="Spellen" asp-action="Index">Doe mee aan een ander spel</a> <a asp-area="" asp-controller="Spellen" asp-action="Create">Maak een nieuw spel</a></div></div><div class="overlay" id="overlayZwart"><div class="overlay--text"><p>Zwart heeft gewonnen!</p><a asp-area="" asp-controller="Spellen" asp-action="Index">Doe mee aan een ander spel</a> <a asp-area="" asp-controller="Spellen" asp-action="Create">Maak een nieuw spel</a></div></div><script>Game.Reversi.init('@ViewData["spelerToken"]','@ViewData["kleur"]')</script><article id="join" class="alert alert-success" role="alert" style="display:none"><section style="float:right"><img src="images/close.png" width="25em"></section><section><img src="images/checkmark.png" class="join__image__tick" width="200"><p style="display:inline-block">Mike wil deelnemen aan jouw spel. Geef akkoord.</p></section><section class="join__buttons"><button id="join_agree" class="join__button join__button__agree">Akkoord</button> <button id="join_disagree" class="join__button">Weigeren</button></section></article><script>async function createBoard(){
+        Game.Reversi.BoardInit('@Model.Token');
+    }</script><article class="grid--start" id="reversiBoard"><script>createBoard()</script></article><article><button onclick='Game.Reversi.showFiche("Pas")'>Pas</button> <button onclick="Game.Reversi.GeefOp()">GeefOp</button><section><p>Speler 1: @ViewData["Speler1"]</p><p style="display:inline-block">Speler 2: @ViewData["Speler2"]</p></section><p>Omschrijving<br>@Model.Omschrijving</p><a asp-area="" asp-controller="Spellen" asp-action="Index">Doe mee aan een ander spel</a> <a asp-area="" asp-controller="Spellen" asp-action="Create">Maak een nieuw spel</a></article><canvas id="BalanceChart" width="200" height="200"></canvas><canvas id="VeldenChart" width="200" height="200"></canvas><script>const ctxBalance = document.getElementById('BalanceChart').getContext('2d');
+const balanceChart = new Chart(ctxBalance, {
+    type: 'line',
+    data: {
+        labels: [1],
+        datasets: [{
+            label: 'Balans',
+            data: [0],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+            ],
+            borderWidth: 1,
+            lineTension: 0,
+            fill: true,
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Balans tussen kleuren'
+            }
+    },
+    interaction: {
+      mode: 'index',
+      intersect: false
+    },
+    scales: {
+      x: {
+        display: true,
+        title: {
+          display: true,
+          text: 'Beurt'
+        }
+      },
+      y: {
+        display: true,
+        title: {
+          display: true,
+          text: 'Value'
+        }
+      }
+    }
+}
+});
+
+const ctxVelden = document.getElementById('VeldenChart').getContext('2d');
+const veldenChart = new Chart(ctxVelden, {
+    type: 'line',
+    data: {
+        labels: [1],
+        datasets: [
+        {
+            label: 'Wit',
+            data: [2],
+            backgroundColor: [
+                'rgba(0, 0, 255, 0.2)',
+            ],
+            borderColor: [
+                'rgba(0, 0, 255, 1)',
+            ],
+            borderWidth: 1,
+            lineTension: 0,
+            fill: false,
+        },
+        {
+            label: 'Zwart',
+            data: [2],
+            backgroundColor: [
+                'rgba(0, 0, 0, 0.2)'
+            ],
+            borderColor: [
+                'rgba(0, 0, 0, 1)'
+            ],
+            borderWidth: 1,
+            lineTension: 0,
+            fill: false,
+        }
+    ]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Aantal fiches'
+            }
+    },
+    interaction: {
+      mode: 'index',
+      intersect: false
+    },
+    scales: {
+      x: {
+        display: true,
+        title: {
+          display: true,
+          text: 'Beurt'
+        }
+      },
+      y: {
+        display: true,
+        title: {
+          display: true,
+          text: 'Value'
+        }
+      }
+    }
+}
+});</script><script>var f;
+    $( document ).ready(function() {
+        f = new FeedbackWidget(23);
+    });
+    
+    $(":button").on("click", function(){
+      f.show("test", "success");
+    }); 
+
+    function afterInit() {
+        console.log('Game init voltooid')
+    }
+    $(function(){
+        Game.init(afterInit);
+    })
+
+    function EndGame(){
+        window.location.href = '@Url.Action("EndGame", "Spellen")?spelToken=@Model.Token';
+    }
+
+    function EndGameSecondPlayer(){
+        window.location.href="@Url.Action("Index", "Spellen")"
+    }</script></body>
