@@ -259,7 +259,7 @@ Game.Reversi = (function(){
 Game.Data = (function(){
 
     let configMap = {
-        path: 'https://localhost:5501/api/Spel/',
+        path: 'https://peugeot9x8hype.hbo-ict.org/Spellen/',
         apiKey: 'f6a132c79543334273e89822ceb23cf4',
         mock: [
             {

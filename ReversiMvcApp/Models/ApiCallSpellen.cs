@@ -138,5 +138,19 @@ namespace ReversiMvcApp.Models
 			string request = JsonConvert.SerializeObject(spsp);
             HttpResponseMessage response = await client.PostAsync("addPlayer", new StringContent(request, Encoding.UTF8, "application/json"));
         }
+
+        public async ValueTask<string> DoeZet(SpelSpelerZet identifier)
+		{
+            string request = JsonConvert.SerializeObject(identifier);
+            HttpResponseMessage response = await client.PostAsync("DoeZet", new StringContent(request, Encoding.UTF8, "application/json"));
+            return response.Content.ToString();
+        }
+
+        public async ValueTask<string> Opgeven(SpelSpeler identifier)
+        {
+            string request = JsonConvert.SerializeObject(identifier);
+            HttpResponseMessage response = await client.PostAsync("GeefOp", new StringContent(request, Encoding.UTF8, "application/json"));
+            return response.Content.ToString();
+        }
     }
 }

@@ -375,5 +375,66 @@ namespace ReversiMvcApp.Controllers
 			}
             return false;
         }
+
+        //Verkrijgen van data omdat de API niet direct bereikt kan worden op de server
+        [HttpGet]
+        [Route("bord/{spelToken}")]
+        [Consumes("application/text")]
+        public async ValueTask<string> GetBordVanSpelAsync(string spelToken)
+        {
+            Spel spel = await spellen.GetSpel(spelToken);
+            if (spel != null)
+            {
+                APISpel formattedSpel = new APISpel(spel);
+                return formattedSpel.Bord;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        [HttpGet]
+        [Route("Beurt/{spelToken}")]
+        public async ValueTask<string> GetAanDeBeurt(string spelToken)
+        {
+            Spel correctSpel = await spellen.GetSpel(spelToken);
+            if (correctSpel != null)
+            {
+                return correctSpel.AandeBeurt.ToString();
+            }
+            else
+            {
+                return "Geen spel gevonden";
+            }
+        }
+        [HttpPut]
+        [Route("Zet")]
+        [Consumes("application/json")]
+        public async ValueTask<string> DoeZet([FromBody] SpelSpelerZet identifierZet)
+        {
+            if (ModelState.IsValid)
+            {
+                return await spellen.DoeZet(identifierZet);
+            }
+            else
+            {
+                return "Invalid input";
+            }
+        }
+        [HttpPut]
+        [Route("Opgeven")]
+        [Consumes("application/json")]
+        public async ValueTask<string> GeefOp([FromBody] SpelSpeler identifier)
+        {
+            if (ModelState.IsValid)
+            {
+                return await spellen.Opgeven(identifier);
+            }
+            else
+            {
+                return "Invalid input";
+            }
+        }
     }
 }
