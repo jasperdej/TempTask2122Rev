@@ -54,6 +54,7 @@ namespace ReversiMvcApp.Areas.Identity.Pages.Account
                     pageHandler: null,
                     values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                     protocol: Request.Scheme);
+                return RedirectToPage("ConfirmEmail", new { userId = userId, code = code, returnUrl = returnUrl });
             }
 
             return Page();
