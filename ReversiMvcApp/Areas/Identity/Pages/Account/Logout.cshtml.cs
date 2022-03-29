@@ -31,6 +31,8 @@ namespace ReversiMvcApp.Areas.Identity.Pages.Account
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
+            return RedirectToAction("Index", "Home");
+            /*
             if (returnUrl != null)
             {
                 return LocalRedirect(returnUrl);
@@ -38,7 +40,7 @@ namespace ReversiMvcApp.Areas.Identity.Pages.Account
             else
             {
                 return RedirectToPage();
-            }
+            }*/
         }
     }
 }
