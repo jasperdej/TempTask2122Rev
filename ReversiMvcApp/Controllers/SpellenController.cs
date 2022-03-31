@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using ReversiMvcApp.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
+using System.Web;
 
 namespace ReversiMvcApp.Controllers
 {
@@ -126,10 +127,10 @@ namespace ReversiMvcApp.Controllers
             }
             Gebruiker speler1 = await _userManager.FindByIdAsync(spel.Speler1Token);
             Gebruiker speler2 = await _userManager.FindByIdAsync(spel.Speler2Token);
-            ViewData["Speler1"] = speler1.UserName;
+            ViewData["Speler1"] = HttpUtility.HtmlEncode(speler1.UserName);
             if (speler2 != null)
             {
-                ViewData["Speler2"] = speler2.UserName;
+                ViewData["Speler2"] = HttpUtility.HtmlEncode(speler2.UserName);
 			}
 			else
 			{
